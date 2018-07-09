@@ -31,6 +31,10 @@
 图片链接引用型：
 [![](baidu_logo)](baidu)
 
+
+## 引用链接：
+基本引用链接：
+[]()
 <!--下面是本文中的链接-->
 [baidu_logo]:https://www.baidu.com/img/bd_logo1.png
 [biadu]:http://www.baidu.com
