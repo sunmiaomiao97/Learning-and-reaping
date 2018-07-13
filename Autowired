@@ -1,0 +1,27 @@
+# Autowired
+
+首先要知道另一个东西，default-autowire，它是在xml文件中进行配置的，可以设置为byName、byType、constructor和autodetect；比如byName，不用显式的在bean中写出依赖的对象，它会自动的匹配其它bean中id名与本bean的set**相同的，并自动装载。
+@Autowired是用在JavaBean中的注解，通过byType形式，用来给指定的字段或方法注入所需的外部资源。可以对成员变量、方法及构造函数进行标注，完型自动装配的工作，通过 @Autowired的使用来消除 set ，get方法。
+ 
+两者的功能是一样的，都能欧减少或者消除属性或者构造器参数的设置。只是配置的地方不一样。
+
+
+
+# 1、Setter 方法中的 @Autowired 
+你可以在 JavaBean中的 setter 方法中使用 @Autowired 注解。当 Spring遇到一个在 setter 方法中使用的 @Autowired 注解，它会在方法中执行 byType 自动装配。 
+## Autowire四种模式
+### byType
+如果容器中存在一个与指定属性类型相同的的bean，那么将与该属性自动装配，如果存在多个该类型的bean，那么将会出现异常，并指出不能使用byType方式进行自动调配。若没有找到相匹配的bean，则说明什么事都不会发生，属性也不会被设置，如果你不希望这样，那么可以通过设置dependency check="object"让Spring抛出异常。
+### byName
+根据属性名自动装配，此选项将检查并根据名字查找与属性完全一致的bean，并将将其属性自动配置。例如：在bean定义中将autowire设置为byname,而该bean包含master属性(同时提供setMaster()方法)。Spring就会查找名为master的bean定义，并用它来装配给master属性。
+### constructor
+与byType的方式类似，不同之处在于它应用于构造器函数，如果容器中没有找到与构造函数参数类型一致的bean，那么将抛出异常。
+### autodetect
+通过bean类的自省机制(introspection)来决定是使用constructor还是byType方式进行自动装配，如果发现默认的构造器，那么将使用byType方式。
+
+
+# 2、构造函数中的 @Autowired 
+你也可以在构造函数中使用 @Autowired。一个构造函数 @Autowired 说明当创建 bean 时，即使在 XML 文件中没有使用 元素配置 bean ，构造函数也会被自动连接。
+
+# 3、@Autowired 的（required=false）选项 
+默认情况下，@Autowired 注解意味着依赖是必须的，它类似于 @Required 注解，然而，你可以使用 @Autowired 的 （required=false） 选项关闭默认行为。
